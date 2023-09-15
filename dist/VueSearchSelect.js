@@ -1,4 +1,4 @@
-import { openBlock as m, createElementBlock as c, normalizeClass as f, createElementVNode as p, withModifiers as a, withKeys as u, toDisplayString as x, normalizeStyle as O, Fragment as I, renderList as v, h as T, createTextVNode as S, createCommentVNode as V, withDirectives as M, vModelText as A } from "vue";
+import { openBlock as m, createElementBlock as c, normalizeClass as f, createElementVNode as d, withModifiers as p, withKeys as u, normalizeStyle as O, Fragment as I, renderList as v, h as T, createTextVNode as S, toDisplayString as b, createCommentVNode as V, withDirectives as M, vModelText as A } from "vue";
 const l = {
   // cursor on input
   openOptions(e) {
@@ -28,7 +28,7 @@ const l = {
   nextItem(e) {
     const t = e.pointer + 1, n = e.$el.offsetHeight * t;
     t <= e.filteredOptions.length - 1 && (e.pointer = t);
-    const d = e.$refs.menu.offsetHeight, r = Math.ceil((e.$refs.menu.scrollTop + e.$el.offsetHeight) / d), s = Math.ceil(n / d);
+    const a = e.$refs.menu.offsetHeight, r = Math.ceil((e.$refs.menu.scrollTop + e.$el.offsetHeight) / a), s = Math.ceil(n / a);
     r !== s && (e.$refs.menu.scrollTop = (s - 1) * e.$refs.menu.offsetHeight);
   },
   // down enter key
@@ -50,7 +50,7 @@ const l = {
 function C(e) {
   return new RegExp(e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
 }
-const b = {
+const x = {
   props: {
     id: {
       default: null
@@ -82,12 +82,12 @@ const b = {
   }
 }, w = (e, t) => {
   const n = e.__vccOpts || e;
-  for (const [d, r] of t)
-    n[d] = r;
+  for (const [a, r] of t)
+    n[a] = r;
   return n;
 }, E = {
   name: "ModelSelect",
-  mixins: [b],
+  mixins: [x],
   emits: ["blur", "searchchange", "update:modelValue"],
   props: {
     modelValue: {
@@ -206,15 +206,15 @@ const b = {
       return typeof e == "object" && e !== null ? e.value : e;
     }
   }
-}, k = /* @__PURE__ */ p("i", { class: "dropdown icon" }, null, -1), D = ["disabled", "tabindex", "id", "name", "value"], j = ["data-vss-custom-attr"], R = ["data-vss-custom-attr", "onClick", "onMouseenter"], B = ["innerHTML"];
-function F(e, t, n, d, r, s) {
+}, k = /* @__PURE__ */ d("i", { class: "dropdown icon" }, null, -1), D = ["disabled", "tabindex", "id", "name", "value"], j = ["data-vss-custom-attr"], L = ["innerHTML"], R = ["data-vss-custom-attr", "onClick", "onMouseenter"], B = ["innerHTML"];
+function F(e, t, n, a, r, s) {
   return m(), c("div", {
     class: f(["ui fluid search selection dropdown", { "active visible": r.showMenu, error: e.isError, disabled: e.isDisabled }]),
     onClick: t[11] || (t[11] = (...i) => s.openOptions && s.openOptions(...i)),
     onFocus: t[12] || (t[12] = (...i) => s.openOptions && s.openOptions(...i))
   }, [
     k,
-    p("input", {
+    d("input", {
       class: "search",
       autocomplete: "off",
       disabled: e.isDisabled,
@@ -224,28 +224,30 @@ function F(e, t, n, d, r, s) {
       value: r.searchText,
       onInput: t[0] || (t[0] = (i) => r.searchText = i.target.value),
       ref: "input",
-      onFocus: t[1] || (t[1] = a((...i) => s.openOptions && s.openOptions(...i), ["prevent"])),
+      onFocus: t[1] || (t[1] = p((...i) => s.openOptions && s.openOptions(...i), ["prevent"])),
       onKeyup: [
         t[2] || (t[2] = u((...i) => s.closeOptions && s.closeOptions(...i), ["esc"])),
-        t[7] || (t[7] = u(a((...i) => s.enterItem && s.enterItem(...i), ["prevent"]), ["enter"]))
+        t[7] || (t[7] = u(p((...i) => s.enterItem && s.enterItem(...i), ["prevent"]), ["enter"]))
       ],
       onBlur: t[3] || (t[3] = (...i) => s.blurInput && s.blurInput(...i)),
       onKeydown: [
         t[4] || (t[4] = u((...i) => s.prevItem && s.prevItem(...i), ["up"])),
         t[5] || (t[5] = u((...i) => s.nextItem && s.nextItem(...i), ["down"])),
-        t[6] || (t[6] = u(a(() => {
+        t[6] || (t[6] = u(p(() => {
         }, ["prevent"]), ["enter"])),
         t[8] || (t[8] = u((...i) => s.deleteTextOrItem && s.deleteTextOrItem(...i), ["delete"]))
       ]
     }, null, 40, D),
-    p("div", {
+    d("div", {
       class: f(["text", s.textClass]),
       "data-vss-custom-attr": s.searchTextCustomAttr
-    }, x(s.inputText), 11, j),
-    p("div", {
+    }, [
+      d("span", { innerHTML: s.inputText }, null, 8, L)
+    ], 10, j),
+    d("div", {
       class: f(["menu", s.menuClass]),
       ref: "menu",
-      onMousedown: t[10] || (t[10] = a(() => {
+      onMousedown: t[10] || (t[10] = p(() => {
       }, ["prevent"])),
       style: O(s.menuStyle),
       tabindex: "-1"
@@ -254,20 +256,20 @@ function F(e, t, n, d, r, s) {
         key: o,
         class: f(["item", { selected: i.selected || r.pointer === o, disabled: i.disabled }]),
         "data-vss-custom-attr": s.customAttrs[o] ? s.customAttrs[o] : "",
-        onClick: a((h) => s.selectItem(i), ["stop"]),
+        onClick: p((h) => s.selectItem(i), ["stop"]),
         onMousedown: t[9] || (t[9] = (...h) => s.mousedownItem && s.mousedownItem(...h)),
         onMouseenter: (h) => s.pointerSet(o)
       }, [
-        p("span", {
+        d("span", {
           innerHTML: i.text
         }, null, 8, B)
       ], 42, R))), 128))
     ], 38)
   ], 34);
 }
-const y = /* @__PURE__ */ w(E, [["render", F]]), q = {
+const y = /* @__PURE__ */ w(E, [["render", F]]), G = {
   name: "ModelListSelect",
-  mixins: [b],
+  mixins: [x],
   emits: ["blur", "searchchange", "update:modelValue"],
   render: function() {
     return T(y, {
@@ -335,9 +337,9 @@ const y = /* @__PURE__ */ w(E, [["render", F]]), q = {
   components: {
     ModelSelect: y
   }
-}, L = {
+}, H = {
   name: "MultiSelect",
-  mixins: [b],
+  mixins: [x],
   emits: ["blur", "searchchange", "select"],
   props: {
     customAttr: {
@@ -447,7 +449,7 @@ const y = /* @__PURE__ */ w(E, [["render", F]]), q = {
       l.mousedownItem(this);
     },
     selectItem(e) {
-      const t = this.selectedOptions.concat(e), n = t.filter((d, r) => t.indexOf(d) === r);
+      const t = this.selectedOptions.concat(e), n = t.filter((a, r) => t.indexOf(a) === r);
       this.closeOptions(), this.searchText = "", this.$emit("select", n, e, "insert");
     },
     deleteItem(e) {
@@ -459,8 +461,8 @@ const y = /* @__PURE__ */ w(E, [["render", F]]), q = {
       return t = t.replace(new RegExp("[àáâãäå]", "g"), "a"), t = t.replace(new RegExp("æ", "g"), "ae"), t = t.replace(new RegExp("ç", "g"), "c"), t = t.replace(new RegExp("[èéêë]", "g"), "e"), t = t.replace(new RegExp("[ìíîï]", "g"), "i"), t = t.replace(new RegExp("ñ", "g"), "n"), t = t.replace(new RegExp("[òóôõö]", "g"), "o"), t = t.replace(new RegExp("œ", "g"), "oe"), t = t.replace(new RegExp("[ùúûü]", "g"), "u"), t = t.replace(new RegExp("[ýÿ]", "g"), "y"), t;
     }
   }
-}, P = /* @__PURE__ */ p("i", { class: "dropdown icon" }, null, -1), H = ["data-vss-custom-attr"], K = ["onClick"], N = ["disabled", "tabindex", "id", "name"], z = ["data-vss-custom-attr", "onClick", "onMouseenter"];
-function U(e, t, n, d, r, s) {
+}, P = /* @__PURE__ */ d("i", { class: "dropdown icon" }, null, -1), K = ["data-vss-custom-attr"], N = ["onClick"], z = ["disabled", "tabindex", "id", "name"], U = ["data-vss-custom-attr", "onClick", "onMouseenter"];
+function W(e, t, n, a, r, s) {
   return m(), c("div", {
     class: f(["ui fluid search dropdown selection multiple", { "active visible": r.showMenu, error: e.isError, disabled: e.isDisabled }]),
     onClick: t[11] || (t[11] = (...i) => s.openOptions && s.openOptions(...i)),
@@ -473,13 +475,13 @@ function U(e, t, n, d, r, s) {
       style: { display: "inline-block !important" },
       "data-vss-custom-attr": n.customAttr(i)
     }, [
-      S(x(i.text), 1),
-      p("i", {
+      S(b(i.text), 1),
+      d("i", {
         class: "delete icon",
         onClick: (h) => s.deleteItem(i)
-      }, null, 8, K)
-    ], 8, H))), 128)),
-    M(p("input", {
+      }, null, 8, N)
+    ], 8, K))), 128)),
+    M(d("input", {
       class: "search",
       autocomplete: "off",
       disabled: e.isDisabled,
@@ -489,29 +491,29 @@ function U(e, t, n, d, r, s) {
       "onUpdate:modelValue": t[0] || (t[0] = (i) => r.searchText = i),
       ref: "input",
       style: O(s.inputWidth),
-      onFocus: t[1] || (t[1] = a((...i) => s.openOptions && s.openOptions(...i), ["prevent"])),
+      onFocus: t[1] || (t[1] = p((...i) => s.openOptions && s.openOptions(...i), ["prevent"])),
       onKeyup: [
         t[2] || (t[2] = u((...i) => s.closeOptions && s.closeOptions(...i), ["esc"])),
-        t[7] || (t[7] = u(a((...i) => s.enterItem && s.enterItem(...i), ["prevent"]), ["enter"]))
+        t[7] || (t[7] = u(p((...i) => s.enterItem && s.enterItem(...i), ["prevent"]), ["enter"]))
       ],
       onBlur: t[3] || (t[3] = (...i) => s.blurInput && s.blurInput(...i)),
       onKeydown: [
         t[4] || (t[4] = u((...i) => s.prevItem && s.prevItem(...i), ["up"])),
         t[5] || (t[5] = u((...i) => s.nextItem && s.nextItem(...i), ["down"])),
-        t[6] || (t[6] = u(a(() => {
+        t[6] || (t[6] = u(p(() => {
         }, ["prevent"]), ["enter"])),
         t[8] || (t[8] = u((...i) => s.deleteTextOrLastItem && s.deleteTextOrLastItem(...i), ["delete"]))
       ]
-    }, null, 44, N), [
+    }, null, 44, z), [
       [A, r.searchText]
     ]),
-    p("div", {
+    d("div", {
       class: f(["text", s.textClass])
-    }, x(s.inputText), 3),
-    p("div", {
+    }, b(s.inputText), 3),
+    d("div", {
       class: f(["menu", s.menuClass]),
       ref: "menu",
-      onMousedown: t[10] || (t[10] = a(() => {
+      onMousedown: t[10] || (t[10] = p(() => {
       }, ["prevent"])),
       style: O(s.menuStyle),
       tabindex: "-1"
@@ -520,16 +522,16 @@ function U(e, t, n, d, r, s) {
         key: o,
         class: f(["item", { selected: i.selected || r.pointer === o, disabled: i.disabled }]),
         "data-vss-custom-attr": n.customAttr(i),
-        onClick: a((h) => s.selectItem(i), ["stop"]),
+        onClick: p((h) => s.selectItem(i), ["stop"]),
         onMousedown: t[9] || (t[9] = (...h) => s.mousedownItem && s.mousedownItem(...h)),
         onMouseenter: (h) => s.pointerSet(o)
-      }, x(i.text), 43, z))), 128))
+      }, b(i.text), 43, U))), 128))
     ], 38)
   ], 34);
 }
-const g = /* @__PURE__ */ w(L, [["render", U]]), G = {
+const g = /* @__PURE__ */ w(H, [["render", W]]), J = {
   name: "MultiListSelect",
-  mixins: [b],
+  mixins: [x],
   emits: ["blur", "searchchange", "select"],
   render: function() {
     return T(g, {
@@ -581,8 +583,8 @@ const g = /* @__PURE__ */ w(L, [["render", U]]), G = {
       if (Object.keys(t).length === 0 && t.constructor === Object)
         this.$emit("select", e, t);
       else {
-        const n = this.list.filter((r, s) => e.find((i, o) => r[this.optionValue] === i.value)), d = this.list.find((r) => r[this.optionValue] === t.value);
-        this.$emit("select", n, d);
+        const n = this.list.filter((r, s) => e.find((i, o) => r[this.optionValue] === i.value)), a = this.list.find((r) => r[this.optionValue] === t.value);
+        this.$emit("select", n, a);
       }
     }
   },
@@ -591,8 +593,8 @@ const g = /* @__PURE__ */ w(L, [["render", U]]), G = {
   }
 };
 export {
-  q as ModelListSelect,
+  G as ModelListSelect,
   y as ModelSelect,
-  G as MultiListSelect,
+  J as MultiListSelect,
   g as MultiSelect
 };
